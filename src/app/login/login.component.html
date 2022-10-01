@@ -1,0 +1,40 @@
+<div class="container bg-dark">
+    <div class="row text-bg-black">
+        <div class="col"></div>
+        <div class="col">
+            <div class="card" >
+                <div class="card-header text-bg-dark p-3 fs-4">
+                    Inicio de Sesión
+                </div>
+                <div class="card-body text-bg-secondary">
+                    
+                    <div class="input-group mb-3 ">
+                        <div class="input-group-text fs-6 bg-dark">
+                            <i class="bi bi-person-square bg-white"></i>
+                        </div>
+                        <input [(ngModel)]="user" type="text" class="form-control" placeholder="Nombre de usuario">
+                    </div>
+                    <div class="input-group text-">
+                        <div class="input-group-text fs-6 bg-dark">
+                            <i class="bi bi-shield-lock-fill bg-white"></i>
+                        </div>
+                        <input [(ngModel)]="pass" type="password" class="form-control" placeholder="Contraseña ">
+                    </div>
+                </div>
+                <div class="card-footer text-bg-dark ">
+                    <div class="d-grid gap-2 col-6 mx-auto bg-white rounded-pill">
+                        <button (click)="entrar()" class="btn btn-outline-success fs-5 float-end ">Entrar</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+    <hr class="bg-dark">
+    <hr class="bg-dark">
+    <hr class="bg-dark">
+    <hr class="bg-dark">
+    <hr class="bg-dark">
+    <hr class="bg-dark">
+</div>

@@ -1,0 +1,125 @@
+<div class="container bg-dark">
+    <div class="row bg-black">
+        <div class="col"></div>
+        <div class="col ">
+            <div class="card ">
+
+                <div class="card-header text-bg-dark p-3 fs-4">
+                    Agregar Tema
+                </div>
+                <div class="card-body bg-secondary ">
+                    <div class="input-group ">
+                        <div class="input-group-text   bg-dark">
+                            <i class="bi bi-arrow-right-square bg-white"></i>
+                        </div>
+                        <input [(ngModel)]="newTopic.title" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="card-footer bg-dark">
+                    <div class="card-footer bg-dark">
+                        <div class="d-grid gap-2 col-6 mx-auto bg-white rounded-pill">
+                            <input (click)="createTopic()" type="button" value="Guardar"
+                                class="btn btn-outline-success float-end fs-6">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <hr class="bg-black">
+            <nav>
+                <ul class="pagination pagination-lg text-bg-success">
+                    <ng-container *ngFor="let page of pages">
+                        <li class="page-item  justify-content-center  text-bg-white">
+                            <button (click)="readTopics(page.url)" class="page-link text-bg-secondary "
+                                [class.active]="page.active">{{page.label}}</button>
+                        </li>
+                    </ng-container>
+                </ul>
+            </nav>
+
+            <hr class="bg-black">
+        </div>
+
+        <div class="col"></div>
+    </div>
+    <div class="row">
+        <table class="table table-dark table-striped border-secondary" [class.table-dark]="user.role =='admin'">
+            <thead class="fs-4  bg-secondary">
+                <tr>
+                    <th>Id</th>
+                    <th class="text-center">Tema</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <tr *ngFor="let topic of topics">
+                    <td>{{topic.id}}</td>
+                    <td>{{topic.title}}</td>
+                    <th class="justify-content-between">
+                        <button *ngIf="user.role == 'admin' || user.id == topic.user_id" data-bs-toggle="modal"
+                            data-bs-target="#deleteTopic" (click)="selectTmpTopic(topic)"
+                            class="btn btn-outline-danger btn-sm float-end"><i class="bi bi-trash"></i></button>
+
+                        <button *ngIf="user.role == 'admin' ||  user.id == topic.user_id" data-bs-toggle="modal"
+                            data-bs-target="#editTopic" (click)="selectTmpTopic(topic)"
+                            class="btn btn-outline-success btn-sm float-end"><i
+                                class="bi bi-pencil-fill"></i></button>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+        <nav class="bg-dark">
+            <hr >
+                <ul class="pagination pagination-lg text-bg-dark justify-content-center">
+                    <ng-container *ngFor="let page of pages">
+                        <li class="page-item  justify-content-center  text-bg-white">
+                            <button (click)="readTopics(page.url)" class="page-link text-bg-secondary "
+                                [class.active]="page.active">{{page.label}}</button>
+                        </li>
+                    </ng-container>
+                </ul>
+                <hr>
+            </nav>
+        
+    </div>
+</div>
+
+<!-- editar -->
+<div class="modal fade" id="editTopic" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-secondary">
+                <h5 class="modal-title fs-1" id="exampleModalLabel">Editar tema</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-black ">
+                <input [(ngModel)]="tmpTopic.title" type="text" class="form-control fs-5">
+            </div>
+            <div class="modal-footer bg-secondary" >
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+                <button (click)="updateTopic()" type="button" class="btn btn-success"
+                    data-bs-dismiss="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- eliminar -->
+<div class="modal fade" id="deleteTopic" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-secondary">
+                <h5 class="modal-title fs-1  " id="exampleModalLabel">Eliminar tema</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Esta seguro de eliminar el tema <b>{{tmpTopic.title}}</b>?
+            </div>
+            <div class="modal-footer bg-secondary">
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">No</button>
+                <button (click)="deleteTopic()" type="button" class="btn btn-danger" data-bs-dismiss="modal">Si</button>
+            </div>
+        </div>
+    </div>
+</div>
